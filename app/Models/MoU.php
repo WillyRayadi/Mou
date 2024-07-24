@@ -11,7 +11,7 @@ class MoU extends Model
 
     // protected $guarded = ['id'];
 
-    protected $fillable = ['judul', 'deskripsi', 'status', 'mitra_id'];
+    protected $fillable = ['judul', 'fileMoU', 'denganPihak', 'waktuMulai', 'waktuSelesai', 'textMoU', 'status'];
 
     public function signatures()
     {
