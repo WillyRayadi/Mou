@@ -25,7 +25,7 @@ Route::get('/masuk', [MasukController::class, 'index'])->name('login')->middlewa
 Route::post('/masuk', [MasukController::class, 'masuk'])->middleware('guest');
 Route::post('/keluar', [MasukController::class, 'keluar'])->middleware('auth');
 
-Route::get('/', [Controller::class, 'index']);
+Route::get('/', [Controller::class, 'index'])->name('mous.index');
 Route::get('/about', [Controller::class, 'about']);
 
 // Route untuk category dan subcategory

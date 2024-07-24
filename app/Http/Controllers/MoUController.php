@@ -29,8 +29,6 @@ class MoUController extends Controller
         //     "kerjasamas" => Kerjasama::all(),
         // ]);
 
-        \App\Models\MoU::where('waktuSelesai', '<', \Carbon\Carbon::now()->format('Y-m-d'))->update(['status' => 'Tidak Berlaku']);
-        \App\Models\MoU::whereBetween('waktuSelesai', [\Carbon\Carbon::now()->format('Y-m-d'), \Carbon\Carbon::now()->addMonth()->format('Y-m-d')])->update(['status' => 'Hampir Berakhir']);
         return view('contents.MoU.index', [
             'title' => 'Semua MoU',
             'MoUs' => MoU::all(),
@@ -197,7 +195,14 @@ class MoUController extends Controller
     public function showApproveForm($id)
     {
         $mou = MoU::findOrFail($id);
-        return view('contents.MoU.approve', compact('mou'));
+
+        if($mou->status == "Hampir Berakhir"){
+            Mou::where('id', $id)->update(['status' => 'Selesai']);
+        }
+
+        return redirect('/MoU');
+
+        //return view('contents.MoU.approve', compact('mou'));
     }
 
     public function approve(Request $request, $id)
@@ -215,9 +220,9 @@ class MoUController extends Controller
         $signature->signature = $request->signature; // Misal: base64 string dari tanda tangan
         $signature->save();
 
-        // Ubah status MoU
-        $mou->status = 'Finish/Selesai';
-        $mou->save();
+        // Kondisi cek
+        // $mou->status = 'Selesai';
+        // $mou->save();
 
         return redirect()->route('mous.index')->with('success', 'MoU approved successfully.');
     }

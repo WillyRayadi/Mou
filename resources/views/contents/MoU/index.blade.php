@@ -78,14 +78,17 @@
                     <td>
                         <div class="btn-group">
                             {{-- @if (isset(Auth::user()->role) && Auth::user()->role == 'admin') --}}
-                            @if (Auth::user()->role == 'admin' && $MoU->status != 'Finish/Selesai')
+                            @if (Auth::user()->role == 'admin')
                             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-three-dots"></i>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="/MoU/{{ $MoU->id }}/edit">Edit</a></li>
                                 <li><a class="dropdown-item" href="/MoU/{{ $MoU->id }}">Detail</a></li>
-                                <li><a href="{{ route('mous.showApproveForm', $MoU->id) }}" class="btn btn-success">Approve</a></li>
+                                <li>
+                                    @if ($MoU->status != 'Selesai')
+                                    <a href="{{ route('mous.showApproveForm', $MoU->id) }}" class="btn btn-success">Approve</a></li>
+                                    @endif
                             </ul>
                         @endif
                             {{-- <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> --}}
