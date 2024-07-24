@@ -6,6 +6,8 @@ use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\MoUController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,12 @@ Route::post('/keluar', [MasukController::class, 'keluar'])->middleware('auth');
 
 Route::get('/', [Controller::class, 'index']);
 Route::get('/about', [Controller::class, 'about']);
+
+// Route untuk category dan subcategory
+Route::resource('categories', CategoryController::class);
+Route::resource('subcategories', SubcategoryController::class);
+
+Route::get('/user', [Controller::class, 'user']);
 
 Route::resource('/MoU', MoUController::class)->except('create', 'destroy')->middleware('auth');
 

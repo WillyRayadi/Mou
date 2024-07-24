@@ -9,6 +9,16 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 {{ Request::is('/') ? 'text-secondary' : 'text-white' }}">Home</a></li>
                 <li><a href="/MoU" class="nav-link px-2 {{ Request::is('MoU*') ? 'text-secondary' : 'text-white' }}">Semua MoU</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-2 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Master Data
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="nav-link" href="{{ route('categories.index') }}">Categories</a></li>
+                        <li><a class="nav-link" href="{{ route('subcategories.index') }}">Subcategories</a></li>
+                    </ul>
+                </li>
+                <li><a href="/user" class="nav-link px-2 {{ Request::is('user') ? 'text-secondary' : 'text-white' }}">User</a></li>
                 {{-- <li><a href="/about" class="nav-link px-2 {{ Request::is('about') ? 'text-secondary' : 'text-white' }}">Tentang Kita</a></li> --}}
                 {{-- <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
