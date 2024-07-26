@@ -14,36 +14,75 @@
                 <input type="text" name="judul" class="form-control rounded-4 @error('judul')is-invalid @enderror" id="judul" placeholder="Judul Kerjasama" required autofocus value="{{ old('judul', $MoU->judul) }}">
                 <label class="form-label" for="judul">Judul Kerjasama</label>
                 @error('judul')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             <div class="form-floating mb-3 position-relative">
                 <input type="text" name="denganPihak" class="form-control rounded-4 @error('denganPihak')is-invalid @enderror" id="denganPihak" placeholder="Bekerjasama dengan Pihak" required value="{{ old('denganPihak', $MoU->denganPihak) }}">
                 <label class="form-label" for="denganPihak">Bekerjasama dengan Pihak</label>
                 @error('denganPihak')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             <div class="form-floating mb-3 position-relative">
                 <input type="date" name="waktuMulai" class="form-control rounded-4 @error('waktuMulai')is-invalid @enderror" id="waktuMulai" placeholder="Dimulai Kerjasama" value="{{ old('waktuMulai', $MoU->waktuMulai) }}" required>
                 <label class="form-label" for="waktuMulai">Dimulai Kerjasama</label>
                 @error('waktuMulai')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
+            @if($Product)
+            <div class="form-floating mb-3 position-relative">
+                <input type="text" name="products" class="form-control rounded-4 @error('products')is-invalid @enderror" placeholder="Barang" id="products" value="{{ old('products', $Product->products) }}" required>
+                <label class="form-label" for="products">Barang</label>
+                @error('products')
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-floating mb-3 position-relative">
+                <input type="text" name="quantity" class="form-control rounded-4 @error('quantity')is-invalid @enderror" placeholder="Jumlah Barang" id="quantity" value="{{ old('quantity', $Product->quantity) }}" required>
+                <label class="form-label" for="quantity">Jumlah Barang</label>
+                @error('quantity')
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-floating mb-3 position-relative">
+                <input type="text" name="product_size" class="form-control rounded-4 @error('product_size')is-invalid @enderror" placeholder="Ukuran Barang" id="product_size" value="{{ old('product_size', $Product->product_size) }}" required>
+                <label class="form-label" for="product_size">Ukuran Barang</label>
+                @error('product_size')
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-floating mb-3 position-relative">
+                <input type="text" name="product_color" class="form-control rounded-4 @error('product_color')is-invalid @enderror" placeholder="Warna Barang" id="product_color" value="{{ old('product_color', $Product->product_color) }}" required>
+                <label class="form-label" for="product_color">Warna Barang</label>
+                @error('product_color')
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            @endif
+
             <div class="form-floating mb-3 position-relative">
                 <input type="date" name="waktuSelesai" class="form-control rounded-4 @error('waktuSelesai')is-invalid @enderror" id="waktuSelesai" placeholder="Berakhir Kerjasama" value="{{ old('waktuSelesai', $MoU->waktuSelesai) }}" required>
                 <label class="form-label" for="waktuSelesai">Berakhir Kerjasama</label>
                 @error('waktuSelesai')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-tooltip">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             {{-- <div class="mb-3 position-relative">
@@ -52,38 +91,38 @@
                     @foreach ($kerjasamas as $kerjasama)
                         @if (old('kerjasama_id', $MoU->kerjasama_id) == $kerjasama->id)                            
                             <option value="{{ $kerjasama->id }}" selected>{{ $kerjasama->nama }}</option>
-                        @else
-                            <option value="{{ $kerjasama->id }}">{{ $kerjasama->nama }}</option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('kerjasama_id')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div> --}}
-            <div class="mb-3 position-relative">
-                <label for="fileMoU" class="form-label">File MoU</label>
-                <input type="hidden" name="oldFileMoU" value="{{ $MoU->fileMoU }}">
-                <input class="form-control @error('fileMoU') is-invalid @enderror" type="file" id="fileMoU" name="fileMoU">
-                @error('fileMoU')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
-                @enderror
+            @else
+            <option value="{{ $kerjasama->id }}">{{ $kerjasama->nama }}</option>
+            @endif
+            @endforeach
+            </select>
+            @error('kerjasama_id')
+            <div class="invalid-tooltip">
+                {{ $message }}
             </div>
-            <div class="form-floating mb-3 position-relative">
-                <textarea id="textMoU" name="textMoU" class="form-control @error('textMoU')is-invalid @enderror" placeholder="Tulis keterangan MoU disini (support html tags)" id="floatingTextarea2" style="height: 200px">{!!  old('textMoU', $MoU->textMoU)  !!}</textarea>
-                <label for="textMoU">Keterangan</label>
-                @error('textMoU')
-                    <div class="invalid-tooltip">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Simpan</button>
-        </form>
+            @enderror
+    </div> --}}
+    <div class="mb-3 position-relative">
+        <label for="fileMoU" class="form-label">File MoU</label>
+        <input type="hidden" name="oldFileMoU" value="{{ $MoU->fileMoU }}">
+        <input class="form-control @error('fileMoU') is-invalid @enderror" type="file" id="fileMoU" name="fileMoU">
+        @error('fileMoU')
+        <div class="invalid-tooltip">
+            {{ $message }}
+        </div>
+        @enderror
     </div>
+    <div class="form-floating mb-3 position-relative">
+        <textarea id="textMoU" name="textMoU" class="form-control @error('textMoU')is-invalid @enderror" placeholder="Tulis keterangan MoU disini (support html tags)" id="floatingTextarea2" style="height: 200px">{!!  old('textMoU', $MoU->textMoU)  !!}</textarea>
+        <label for="textMoU">Keterangan</label>
+        @error('textMoU')
+        <div class="invalid-tooltip">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
+    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Simpan</button>
+    </form>
+</div>
 </div>
 @endsection

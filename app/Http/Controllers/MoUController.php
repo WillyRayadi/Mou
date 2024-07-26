@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kerjasama;
 use App\Models\MoU;
+use App\Models\MouItem;
+use App\Models\Category;
 use App\Models\Signature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +25,7 @@ class MoUController extends Controller
         //     $kerjasama = Kerjasama::firstWhere('id', request('kerjasama'));
         //     $title = ' pada jenis ' . $kerjasama->nama;
         // }
+
         // return view('contents.MoU.index', [
         //     "title" => "Semua MoU" . $title,
         //     "MoUs" => MoU::latest()->filter(request(['search', 'kerjasama']))->paginate(9)->withQueryString(),
@@ -32,6 +35,7 @@ class MoUController extends Controller
         return view('contents.MoU.index', [
             'title' => 'Semua MoU',
             'MoUs' => MoU::all(),
+            'Category' => Category::all()
             // 'kerjasamas' => Kerjasama::all(),
         ]);
     }
@@ -53,7 +57,7 @@ class MoUController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
@@ -63,9 +67,6 @@ class MoUController extends Controller
             'waktuSelesai' => 'required',
             'textMoU' => 'max:1000',
         ]);
-
-        // Tambahkan log untuk memeriksa $validatedData
-        //Log::info('Validated Data:', $validatedData);
 
         $waktuSelesai = $request['waktuSelesai'];
         if ($request['howLong'] === "Tahun") {
@@ -83,7 +84,20 @@ class MoUController extends Controller
         // Tambahkan 'denganPihak' ke dalam $validatedData
         $validatedData['denganPihak'] = $request->input('denganPihak');
 
-        MoU::create($validatedData);
+        $mou = MoU::create($validatedData);
+
+        // Tambahkan log untuk memeriksa $validatedData
+        //Log::info('Validated Data:', $validatedData);
+
+        $data = [
+            'mou_id' => $mou->id,
+            'products' => $request->input('products'),
+            'quantity' => $request->input('quantity'),
+            'product_size' => $request->input('product_size'),
+            'product_color' => $request->input('product_color')
+        ];
+
+        MouItem::create($data);
         Alert::toast('Data MoU Berhasil Ditambahkan!', 'success');
         return redirect('/MoU');
     }
@@ -146,7 +160,7 @@ class MoUController extends Controller
         return view('contents.MoU.edit', [
             'title' => 'Perubahan MoU',
             'MoU' => $MoU,
-            // 'kerjasamas' => Kerjasama::all(),
+            'Product' => MouItem::where('mou_id', $MoU->id)->first()
         ]);
     }
 
@@ -169,6 +183,13 @@ class MoUController extends Controller
             'textMoU',
         ]);
 
+        $validateProduct = $request->validate([
+            "products" => 'required',
+            "quantity" => 'required',
+            "product_size" => 'required',
+            "product_color" => 'required',
+        ]);
+
         if ($request->file('fileMoU')) {
             if ($request->oldFileMoU) {
                 Storage::delete($request->oldFileMoU);
@@ -177,6 +198,8 @@ class MoUController extends Controller
         }
 
         MoU::where('id', $MoU->id)->update($validatedData);
+        MouItem::where('mou_id', $MoU->id)->update($validateProduct);
+
         Alert::toast('Data MoU Berhasil Diubah!', 'success');
         return redirect('/MoU');
     }
@@ -196,9 +219,8 @@ class MoUController extends Controller
     {
         $mou = MoU::findOrFail($id);
 
-        if($mou->status == "Hampir Berakhir"){
-            Mou::where('id', $id)->update(['status' => 'Selesai']);
-        }
+        Mou::where('id', $id)->update(['status' => 'Selesai']);
+
 
         return redirect('/MoU');
 
