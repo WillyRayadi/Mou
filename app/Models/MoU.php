@@ -18,6 +18,17 @@ class MoU extends Model
         return $this->hasMany(Signature::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    // Relasi dengan MoUItem
+    public function items()
+    {
+        return $this->hasMany(MoUItem::class, 'mou_id');
+    }
+
     // public function kerjasama()
     // {
     //     return $this->belongsTo(Kerjasama::class);

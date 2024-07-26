@@ -8,13 +8,18 @@
                 <li>Bekerja sama dengan {{ $MoU->denganPihak }}</li>
                 <li>Dimulai pada {{ $MoU->waktuMulai }}</li>
                 <li>Berakhir pada {{ $MoU->waktuSelesai }}</li>
+                <li>Kategori: {{ $MoU->category ? $MoU->category->name : 'Tidak ada kategori' }}</li>
+                <li>Barang: {{ $MoU->products }}</li>
+                <li>Jumlah Barang: {{ $MoU->quantity }}</li>
+                <li>Ukuran Barang: {{ $MoU->product_size }}</li>
+                <li>Warna Barang: {{ $MoU->product_color }}</li>
             </ul>
             <h5 class="card-title">Keterangan MoU</h5>
             <p class="card-text">{!! $MoU->textMoU !!}</p>
             <p class="card-text"><small class="text-muted"><span class="badge rounded-pill {{ ($MoU->status === "Berlaku") ? "bg-success" : (($MoU->status === "Hampir Berakhir") ? "bg-warning" : "bg-danger") }}">{{ $MoU->status }}</small></p>
         </div>
         <div class="card-footer">
-            @if (Auth::user()->role == 'admin' && $MoU->status != 'Finish/Selesai')
+            @if (Auth::user()->role == 'admin' && $MoU->status != 'Selesai')
                 <a href="{{ route('mous.approve', $MoU->id) }}" class="btn btn-success">Approve</a>
             @endif
         </div>

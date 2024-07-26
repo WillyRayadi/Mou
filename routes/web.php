@@ -8,6 +8,7 @@ use App\Http\Controllers\MoUController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,6 @@ Route::get('/mous/{id}/approve', [MoUController::class, 'showApproveForm'])->nam
 
 // Route untuk memproses approve
 Route::post('/mous/{id}/approve', [MoUController::class, 'approve'])->name('mous.approve');
+
+// Route untuk CRUD User
+Route::resource('users', UserController::class);

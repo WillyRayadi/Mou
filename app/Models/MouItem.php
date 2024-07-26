@@ -10,4 +10,9 @@ class MouItem extends Model
     use HasFactory;
 
     protected $fillable = ['mou_id', 'products', 'quantity', 'product_size', 'product_color'];
+
+    public function mou()
+    {
+        return $this->belongsTo(MoU::class, 'mou_id');
+    }
 }

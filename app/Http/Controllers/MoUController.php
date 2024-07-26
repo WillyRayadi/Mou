@@ -143,6 +143,9 @@ class MoUController extends Controller
      */
     public function show(MoU $MoU)
     {
+        // Eager load relasi
+        $MoU->load('category', 'items');
+
         return view('contents.MoU.show', [
             'title' => 'Detail MoU',
             'MoU' => $MoU,

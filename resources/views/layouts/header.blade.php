@@ -14,11 +14,15 @@
                         Master Data
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="nav-link" href="{{ route('categories.index') }}">Categories</a></li>
-                        <li><a class="nav-link" href="{{ route('subcategories.index') }}">Subcategories</a></li>
+                        <li><a class="nav-link text-black" href="{{ route('categories.index') }}">Categories</a></li>
+                        {{-- <li><a class="nav-link text-black" href="{{ route('subcategories.index') }}">Subcategories</a></li> --}}
                     </ul>
                 </li>
-                <li><a href="/user" class="nav-link px-2 {{ Request::is('user') ? 'text-secondary' : 'text-white' }}">User</a></li>
+                @auth
+                    @if (Auth::user()->role != 'mitra')
+                        <li><a href="/users" class="nav-link px-2 {{ Request::is('users') ? 'text-secondary' : 'text-white' }}">Users</a></li>
+                    @endif
+                @endauth
                 {{-- <li><a href="/about" class="nav-link px-2 {{ Request::is('about') ? 'text-secondary' : 'text-white' }}">Tentang Kita</a></li> --}}
                 {{-- <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
@@ -34,6 +38,22 @@
 
             <div class="text-end">
                 @auth
+                    <div class="d-inline me-2">
+                        <span>Hi, {{ Auth::user()->username }}</span>
+                    </div>
+                    <form action="/keluar" method="POST" style="display: inline;">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Keluar</button>
+                    </form>
+                @else
+                    <!-- Menyusun tombol login dan daftar dalam satu baris -->
+                    <a href="/masuk" type="button" class="btn btn-outline-light me-2">Masuk</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDaftar">Daftar</button>
+                @endauth
+            </div>
+
+            {{-- <div class="text-end">
+                @auth
                     <form action="/keluar" method="POST">
                         @csrf
                         <button class="btn btn-danger" type="submit">Keluar</button>
@@ -42,7 +62,7 @@
                     <a href="/masuk" type="button" class="btn btn-outline-light me-2">Masuk</a>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDaftar">Daftar</button>
                 @endauth
-            </div>
+            </div> --}}
         </div>
     </div>
 </header>
