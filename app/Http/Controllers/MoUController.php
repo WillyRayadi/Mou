@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdf\Fpdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MoUController extends Controller
 {
@@ -69,6 +72,7 @@ class MoUController extends Controller
         ]);
 
         $waktuSelesai = $request['waktuSelesai'];
+
         if ($request['howLong'] === "Tahun") {
             $validatedData['waktuSelesai'] = \Carbon\Carbon::create($validatedData['waktuMulai'])->addYears($waktuSelesai);
         } else if ($request['howLong'] === "Bulan") {
@@ -174,6 +178,7 @@ class MoUController extends Controller
      * @param  \App\Models\MoU  $moU
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, MoU $MoU)
     {
         $validatedData = $request->validate([
@@ -221,13 +226,25 @@ class MoUController extends Controller
     public function showApproveForm($id)
     {
         $mou = MoU::findOrFail($id);
+        $moutItem = MouItem::where('mou_id', $id)->first();
 
-        Mou::where('id', $id)->update(['status' => 'Selesai']);
+        // for testing
+        // return view('pdf.index', [
+        //     'Mou' => $mou,
+        //     "Item" => $moutItem
+        // ]);
 
+        $pdf = Pdf::loadView('pdf.index', [
+            'Mou' => $mou,
+            "Item" => $moutItem
+        ]);
 
-        return redirect('/MoU');
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+        ]);
 
-        //return view('contents.MoU.approve', compact('mou'));
+        return $pdf->stream('mou.pdf');
     }
 
     public function approve(Request $request, $id)

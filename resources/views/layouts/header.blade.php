@@ -15,16 +15,17 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="nav-link text-black" href="{{ route('categories.index') }}">Categories</a></li>
-                        {{-- <li><a class="nav-link text-black" href="{{ route('subcategories.index') }}">Subcategories</a></li> --}}
-                    </ul>
-                </li>
-                @auth
-                    @if (Auth::user()->role != 'mitra')
-                        <li><a href="/users" class="nav-link px-2 {{ Request::is('users') ? 'text-secondary' : 'text-white' }}">Users</a></li>
-                    @endif
-                @endauth
-                {{-- <li><a href="/about" class="nav-link px-2 {{ Request::is('about') ? 'text-secondary' : 'text-white' }}">Tentang Kita</a></li> --}}
-                {{-- <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                        {{-- <li><a class="nav-link text-black" href="{{ route('subcategories.index') }}">Subcategories</a>
+                </li> --}}
+            </ul>
+            </li>
+            @auth
+            @if (Auth::user()->role != 'mitra')
+            <li><a href="/users" class="nav-link px-2 {{ Request::is('users') ? 'text-secondary' : 'text-white' }}">Users</a></li>
+            @endif
+            @endauth
+            {{-- <li><a href="/about" class="nav-link px-2 {{ Request::is('about') ? 'text-secondary' : 'text-white' }}">Tentang Kita</a></li> --}}
+            {{-- <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
             </ul>
 
@@ -32,23 +33,23 @@
                 @csrf
                 @if (request('kerjasama'))
                     <input type="hidden" name="kerjasama" value="{{ request('kerjasama') }}">
-                @endif
-                <input type="search" class="form-control form-control-dark" placeholder="Cari MoU..." aria-label="Search">
+            @endif
+            <input type="search" class="form-control form-control-dark" placeholder="Cari MoU..." aria-label="Search">
             </form> --}}
 
             <div class="text-end">
                 @auth
-                    <div class="d-inline me-2">
-                        <span>Hi, {{ Auth::user()->username }}</span>
-                    </div>
-                    <form action="/keluar" method="POST" style="display: inline;">
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Keluar</button>
-                    </form>
+                <div class="d-inline me-2">
+                    <span>Hi, {{ Auth::user()->username }}</span>
+                </div>
+                <form action="/keluar" method="POST" style="display: inline;">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">Keluar</button>
+                </form>
                 @else
-                    <!-- Menyusun tombol login dan daftar dalam satu baris -->
-                    <a href="/masuk" type="button" class="btn btn-outline-light me-2">Masuk</a>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDaftar">Daftar</button>
+                <!-- Menyusun tombol login dan daftar dalam satu baris -->
+                <a href="/masuk" type="button" class="btn btn-outline-light me-2">Masuk</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDaftar">Daftar</button>
                 @endauth
             </div>
 
