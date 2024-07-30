@@ -70,7 +70,7 @@
             @foreach ($MoUs as $MoU)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td><a target="_blank" href="storage/{{ $MoU->fileMoU }}">{{ $MoU->judul }}</a></td>
+                    <td><a target="_blank" href="storage/fileMoU/{{ $MoU->fileMoU }}">{{ $MoU->judul }}</a></td>
                     <td>{{ $MoU->denganPihak }}</td>
                     {{-- <td>{{ $MoU->kerjasama->nama }}</td> --}}
                     <td>{{ \Carbon\Carbon::create($MoU->waktuSelesai)->diffForHumans() }}</td>

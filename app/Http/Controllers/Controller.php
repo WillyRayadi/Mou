@@ -14,8 +14,8 @@ class Controller extends BaseController
 
     public function index()
     {
-        \App\Models\MoU::where('waktuSelesai', '<', \Carbon\Carbon::now()->format('Y-m-d'))->update(['status' => 'Tidak Berlaku']);
-        \App\Models\MoU::whereBetween('waktuSelesai', [\Carbon\Carbon::now()->format('Y-m-d'), \Carbon\Carbon::now()->addMonth()->format('Y-m-d')])->update(['status' => 'Hampir Berakhir']);
+        // \App\Models\MoU::where('waktuSelesai', '<', \Carbon\Carbon::now()->format('Y-m-d'))->update(['status' => 'Tidak Berlaku']);
+        // \App\Models\MoU::whereBetween('waktuSelesai', [\Carbon\Carbon::now()->format('Y-m-d'), \Carbon\Carbon::now()->addMonth()->format('Y-m-d')])->update(['status' => 'Hampir Berakhir']);
         return view('contents.welcome', [
             'title' => 'Home',
             'MoUs' => MoU::latest()->limit(10)->get(),

@@ -10,14 +10,21 @@
                 <li><a href="/" class="nav-link px-2 {{ Request::is('/') ? 'text-secondary' : 'text-white' }}">Home</a></li>
                 <li><a href="/MoU" class="nav-link px-2 {{ Request::is('MoU*') ? 'text-secondary' : 'text-white' }}">Semua MoU</a></li>
                 <li class="nav-item dropdown">
+                    @auth
+                    @if (Auth::user()->role != 'mitra')
                     <a class="nav-link dropdown-toggle px-2 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Master Data
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="nav-link text-black" href="{{ route('categories.index') }}">Categories</a></li>
+                        <li>
+                            {{-- @if (Auth::user()->role == 'admin') --}}
+                            <a class="nav-link text-black" href="{{ route('categories.index') }}">Categories</a></li>
+                            {{-- @endif --}}
                         {{-- <li><a class="nav-link text-black" href="{{ route('subcategories.index') }}">Subcategories</a>
                 </li> --}}
             </ul>
+            @endif
+            @endauth
             </li>
             @auth
             @if (Auth::user()->role != 'mitra')

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Fpdf;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 class MoUController extends Controller
 {
@@ -82,7 +83,11 @@ class MoUController extends Controller
         }
 
         if ($request->file('fileMoU')) {
-            $validatedData['fileMoU'] = $request->file('fileMoU')->store('FileMoU');
+            $file = $request->file('fileMoU');
+            $randomName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/fileMoU', $randomName);
+
+            $validatedData['fileMoU'] = $randomName;
         }
 
         // Tambahkan 'denganPihak' ke dalam $validatedData
@@ -227,6 +232,14 @@ class MoUController extends Controller
     {
         $mou = MoU::findOrFail($id);
         $moutItem = MouItem::where('mou_id', $id)->first();
+
+        MoU::where('id', $id)->update(["status" => "Selesai"]);
+
+        // return view('contents.MoU.approve', compact('mou'));
+
+        // return redirect('/MoU');
+
+        // MoU::where('id', $id)->update(["status" => "Selesai"]) ;
 
         // for testing
         // return view('pdf.index', [

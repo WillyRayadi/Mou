@@ -9,7 +9,7 @@
                 <h1 class="display-4 fw-bold lh-1">Memorandum of Understanding</h1>
                 <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                    <a href="#MoUTerbaru" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">MoU Terbaru</a>
+                    {{-- <a href="#MoUTerbaru" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">MoU Terbaru</a> --}}
                     <a href="/MoU" class="btn btn-outline-secondary btn-lg px-4">Selengkapnya</a>
                 </div>
             </div>
@@ -95,76 +95,4 @@
     </div>
 </div> --}}
 {{-- Album End --}}
-<h1 class="text-center" id="MoUTerbaru">MoU Terbaru</h1>
-<div class="container">
-    <table id="example" class="display table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Judul</th>
-                <th>Bekerjasama dengan</th>
-                {{-- <th>Jenis MoU</th> --}}
-                <th>Masa Berlaku</th>
-                <th>Status</th>
-                {{-- @auth
-                    <th>Aksi</th>
-                @endauth --}}
-                <th>
-                    @if (isset(Auth::user()->role) && Auth::user()->role == 'admin')
-                    Aksi
-                    @endif
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($MoUs as $MoU)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    @auth
-                        <td><a target="_blank" href="storage/{{ $MoU->fileMoU }}">{{ $MoU->judul }}</a></td>
-                    @else
-                        <td>{{ $MoU->judul }}</td>
-                    @endauth
-                    <td>{{ $MoU->denganPihak }}</td>
-                    {{-- <td>{{ $MoU->kerjasama->nama }}</td> --}}
-                    <td>{{ \Carbon\Carbon::create($MoU->waktuSelesai)->diffForHumans() }}</td>
-                    <td><span class="badge rounded-pill {{ ($MoU->status === "Berlaku") ? "bg-success" : (($MoU->status === "Hampir Berakhir") ? "bg-warning" : "bg-danger") }}">{{ $MoU->status }}</span></td>
-                    @auth
-                        <td>
-                            <div class="btn-group">
-                                @if (isset(Auth::user()->role) && Auth::user()->role == 'admin')
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-three-dots"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/MoU/{{ $MoU->id }}/edit">Edit</a></li>
-                                    <li><a class="dropdown-item" href="/MoU/{{ $MoU->id }}">Detail</a></li>
-                                </ul>
-                                @endif
-                            </div>
-                        </td>
-                    @endauth
-                </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>No.</th>
-                <th>Judul</th>
-                <th>Bekerjasama dengan</th>
-                {{-- <th>Jenis MoU</th> --}}
-                <th>Masa Berlaku</th>
-                <th>Status</th>
-                {{-- @auth
-                    <th>Aksi</th>
-                @endauth --}}
-                <th>
-                    @if (isset(Auth::user()->role) && Auth::user()->role == 'admin')
-                    Aksi
-                    @endif
-                </th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
 @endsection
