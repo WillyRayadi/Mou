@@ -1,7 +1,6 @@
-@extends('welcome')
+@extends('layouts.template')
 @section('contents')
 
-{{-- @section('content') --}}
 <div class="container">
     <h1 class="mt-5">Create Subcategory</h1>
     <form action="{{ route('subcategories.store') }}" method="POST">
@@ -14,7 +13,7 @@
             <label for="category_id" class="form-label">Category</label>
             <select class="form-control" id="category_id" name="category_id" required>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
         </div>

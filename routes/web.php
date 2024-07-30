@@ -24,7 +24,7 @@ use App\Http\Controllers\UserController;
 Route::post('/daftar', [DaftarController::class, 'daftar'])->middleware('guest');
 Route::get('/masuk', [MasukController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/masuk', [MasukController::class, 'masuk'])->middleware('guest');
-Route::post('/keluar', [MasukController::class, 'keluar'])->middleware('auth');
+Route::get('/keluar', [MasukController::class, 'keluar'])->middleware('auth');
 
 Route::get('/', [Controller::class, 'index'])->name('mous.index');
 Route::get('/about', [Controller::class, 'about']);
@@ -36,6 +36,8 @@ Route::resource('subcategories', SubcategoryController::class);
 Route::get('/user', [Controller::class, 'user']);
 
 Route::resource('/MoU', MoUController::class)->except('create', 'destroy')->middleware('auth');
+Route::get('/dashboard', [MoUController::class, 'dashboard']);
+
 
 // Route untuk menampilkan form approve
 Route::get('/mous/{id}/approve', [MoUController::class, 'showApproveForm'])->name('mous.showApproveForm');
@@ -45,3 +47,6 @@ Route::post('/mous/{id}/approve', [MoUController::class, 'approve'])->name('mous
 
 // Route untuk CRUD User
 Route::resource('users', UserController::class);
+
+// Route untu Reject MoU
+Route::post('/MoU/{id}/reject', [MoUController::class, 'reject'])->name('mous.reject');

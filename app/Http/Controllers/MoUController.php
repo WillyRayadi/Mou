@@ -7,6 +7,7 @@ use App\Models\MoU;
 use App\Models\MouItem;
 use App\Models\Category;
 use App\Models\Signature;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,6 +16,7 @@ use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Fpdf;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class MoUController extends Controller
 {
@@ -42,6 +44,11 @@ class MoUController extends Controller
             'Category' => Category::all()
             // 'kerjasamas' => Kerjasama::all(),
         ]);
+    }
+
+    public function dashboard()
+    {
+        return view('contents.dashboard');
     }
 
     /**
@@ -158,6 +165,7 @@ class MoUController extends Controller
         return view('contents.MoU.show', [
             'title' => 'Detail MoU',
             'MoU' => $MoU,
+            'Product' => MouItem::where('mou_id', $MoU->id)->first()
         ]);
     }
 
@@ -190,7 +198,6 @@ class MoUController extends Controller
             'judul' => 'required|max:255',
             'fileMoU' => 'mimes:pdf',
             'denganPihak' => 'required',
-            // 'kerjasama_id' => 'required',
             'waktuMulai' => 'required',
             'waktuSelesai' => 'required',
             'textMoU',
@@ -280,5 +287,41 @@ class MoUController extends Controller
         // $mou->save();
 
         return redirect()->route('mous.index')->with('success', 'MoU approved successfully.');
+    }
+
+    public function reject($id)
+    {
+        $mou = MoU::find($id);
+
+        if (!$mou) {
+            abort(404);
+        }
+
+        $mou->status = 'Ditolak';
+        $mou->save();
+
+        // Kirim notifikasi ke WhatsApp
+        $mitraUser = User::where('role', 'mitra')->first(); // Asumsi hanya satu user dengan role mitra
+        if ($mitraUser) {
+            $this->sendWhatsAppNotification($mitraUser->phone_number, "Maaf untuk pengajuan MoU Anda untuk saat ini Kami tolak dan tidak dapat Kami tindaklanjuti");
+        }
+
+        return redirect('/MoU')->with('status', 'MoU berhasil ditolak.');
+    }
+
+    protected function sendWhatsAppNotification($phoneNumber, $message)
+    {
+        // Logika untuk mengirim pesan WhatsApp menggunakan API pilihan Anda
+        // Contoh dengan menggunakan API
+        $response = Http::post('https://api.whatsapp.com/send', [
+            'phone' => $phoneNumber,
+            'message' => $message,
+        ]);
+
+        if ($response->successful()) {
+            // Pesan berhasil dikirim
+        } else {
+            // Gagal mengirim pesan
+        }
     }
 }

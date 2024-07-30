@@ -1,7 +1,6 @@
-@extends('welcome')
+@extends('layouts.template')
 @section('contents')
 
-{{-- @section('content') --}}
 <div class="container">
     <h1 class="mt-5">Create Category</h1>
     <form action="{{ route('categories.store') }}" method="POST">

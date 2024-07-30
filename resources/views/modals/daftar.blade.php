@@ -28,6 +28,15 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="form-floating mb-3 position-relative">
+                        <input type="text" name="phone_number" class="form-control rounded-4 @error('phone_number')is-invalid @enderror" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" required>
+                        <label class="form-label" for="phone_number">Nomor Handphone</label>
+                        @error('phone_number')
+                            <div class="invalid-tooltip">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Daftar</button>
                     <small class="text-muted">Dengan mengklik Daftar, Anda menyetujui persyaratan penggunaan.</small>
                 </form>

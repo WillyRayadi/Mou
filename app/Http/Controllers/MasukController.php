@@ -15,13 +15,17 @@ class MasukController extends Controller
     }
     public function masuk(Request $request)
     {
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required'
+        $validation = $request->validate([
+            'user' => 'required',
+            'pass' => 'required'
+        ]);
+        $credentials = ([
+            'username' => $validation['user'],
+            'password' => $validation['pass']
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
         return back();
     }

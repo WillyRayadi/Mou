@@ -1,98 +1,87 @@
-@extends('welcome')
-@section('contents')
-    
-{{-- Hero Start --}}
-@auth
-    <div class="container my-5">
-        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                <h1 class="display-4 fw-bold lh-1">Memorandum of Understanding</h1>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                    {{-- <a href="#MoUTerbaru" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">MoU Terbaru</a> --}}
-                    <a href="/MoU" class="btn btn-outline-secondary btn-lg px-4">Selengkapnya</a>
-                </div>
-            </div>
-            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-                <img class="rounded-lg-3" src="https://source.unsplash.com/3438x2168?teamwork" alt="" width="720">
-            </div>
-        </div>
-    </div>
-@else  
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 mb-3">Memorandum of Understanding</h1>
-                <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-            </div>
-            <div class="col-md-10 mx-auto col-lg-5">
-                <form action="/daftar" method="POST" class="p-4 p-md-5 border rounded-3 bg-light needs-validation" novalidate>
-                    @csrf
-                    <h2 class="fw-bold mb-3">Daftar</h2>
-                    <div class="form-floating mb-3 position-relative">
-                        <input type="text" name="username" class="form-control rounded-4 @error('username')is-invalid @enderror" id="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
-                        <label class="form-label" for="username">Username</label>
-                        @error('username')
-                            <div class="invalid-tooltip">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-3 position-relative">
-                        <input type="password" name="password" class="form-control rounded-4 @error('password')is-invalid @enderror" id="password" placeholder="Password" value="{{ old('password') }}" required>
-                        <label class="form-label" for="password">Password</label>
-                        @error('password')
-                            <div class="invalid-tooltip">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Daftar</button>
-                    <div class="mb-2 text-center">
-                        <small class="text-muted">Sudah punya akun?</small>
-                    </div>
-                    <a href="/masuk" class="w-100 mb-2 btn btn-lg rounded-4 btn-outline-secondary" type="button">Masuk</a>
-                </form>
-            </div>
-        </div>
-    </div>
-@endauth
-{{-- Hero End --}}
+<!doctype html>
+<html lang="en">
 
-{{-- Album Start --}}
-{{-- <div class="album py-5">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach ($MoUs as $MoU)
-                <div class="col">
-                    <div class="card shadow-sm">
-                        @if ($MoU->fileMoU)
-                        <div style="max-height:225px; overflow:hidden;">
-                            <img src="{{ asset('storage/' . $MoU->fileMoU) }}" alt="{{ $MoU->kerjasama->nama }}">
-                        </div>
-                        @else
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">MoU Preview</text></svg>
-                        @endif
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  {{-- <title>MoU - {{ $title }}</title> --}}
 
-                        <div class="card-body">
-                            <ul>
-                                <li>w/{{ $MoU->denganPihak }}</li>
-                                <li>{{ $MoU->kerjasama->nama }}</li>
-                            </ul>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="/MoU/{{ $MoU->id }}" type="button" class="btn btn-sm btn-outline-primary">Detail</a>
-                                    <a href="/MoU/{{ $MoU->id }}/edit" type="button" class="btn btn-sm btn-outline-warning">Ubah</a>
-                                </div>
-                                <small class="text-muted">Sampai: {{ $MoU->waktuSelesai }}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+  <!-- Bootstrap core CSS -->
+  <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Boxicons -->
+  <link rel="stylesheet" href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+
+</head>
+
+<body>
+
+  <div class="containers">
+    <div class="box">
+      <div class="box-content">
+
+        <!-- Sign In Form -->
+        <form action="/masuk" method="POST" class="sign-in-form">
+          @csrf
+          <h2 class="title">Sign In</h2>
+          <div class="input-field">
+            <i class="bx bxs-user"></i>
+            <input type="text" name="user" placeholder="Username">
+          </div>
+          <div class="input-field">
+            <i class="bx bxs-lock"></i>
+            <input type="password" name="pass" placeholder="Password">
+          </div>
+          <input type="submit" value="sign in" class="btns solid">
+        </form>
+
+        <!-- Sign Up Form -->
+        <form action="/daftar" method="POST" class="sign-up-form">
+          @csrf
+          <h2 class="title">Sign Up</h2>
+          <div class="input-field">
+            <i class="bx bxs-user"></i>
+            <input type="text" name="username" placeholder="Username">
+          </div>
+          <div class="input-field">
+            <i class="bx bxs-phone"></i>
+            <input type="text" name="phone_number" placeholder="Phone Number">
+          </div>
+          <div class="input-field">
+            <i class="bx bxs-lock"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+          <input type="submit" value="sign up" class="btns solid">
+        </form>
+      </div>
+
+      <!-- Panel -->
+      <div class="panel-container">
+        <!-- Sign Up Panel  -->
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Don't Have Account ?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, Minus impedit quidem quibusdam</p>
+            <button class="btns transparent" id="sign-up-btn">Sign Up</button>
+          </div>
         </div>
+        <!-- Sign In Panel -->
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>Already Have Account ?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, Minus impedit quidem quibusdam</p>
+            <button class="btns transparent" id="sign-in-btn">Sign In</button>
+          </div>
+        </div>
+      </div>
+      <!-- Panel End -->
     </div>
-</div> --}}
-{{-- Album End --}}
-@endsection
+  </div>
+
+  <script src="{{ asset('js/app.js') }}"></script>
+</body>
+
+</html>

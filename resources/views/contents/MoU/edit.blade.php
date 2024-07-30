@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.template')
 @section('contents')
 
 <div class="min-width">
