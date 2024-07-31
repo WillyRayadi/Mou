@@ -76,7 +76,7 @@
             background-color: #f2f2f2;
         }
 
-        .sign {
+        /* .sign {
         width: 100%;
         margin-top: 30px;
         display: flex;
@@ -109,6 +109,21 @@
 
         .sign div span:last-child b {
         font-size: 12px;
+        } */
+
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .signature-table td {
+            padding: 20px;
+            vertical-align: bottom;
+            text-align: left;
+        }
+        .signature-table .sign-line {
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -231,7 +246,7 @@
             <p>Demikianlah Perjanjian Ini dibuat atas dasar kesepakatan kedua belah pihak, keduanya bermaterai cukup, serta ditandatangani oleh <br>kedua belah pihak. masing masing rangkapnya memiliki kuasa hukum yang sama dan masing-masing pihak akan memegang satu<br> diantaranya sebagai aslinya.</p>
         </div>
 
-        <div class="sign">
+        {{-- <div class="sign">
             <div>
               <span><b>Pihak Pertama</b></span>
               <span><b>PT. Indomarco Prismatama</b></span>
@@ -242,16 +257,24 @@
               <span><b>PT. Kokikit Teknologi Oase</b></span>
               <span><b><br><br><br>(BP Andry Suhaili)</b></span>
             </div>
-        </div>
+        </div> --}}
 
-        <table>
-            <tr>dasdad
-                <td>dsadasd</td>
-                <td>123324</td>
-            </tr>
+        <table class="signature-table">
             <tr>
-                <td>dasdsasd</td>
-                <td>123324</td>
+                <td>
+                    <b>PIHAK PERTAMA</b><br>
+                    <b>PT. Indomarco Prismatama</b>
+                </td>
+                <td></td>
+                <td>
+                    <b>PIHAK KEDUA</b><br>
+                    <b>PT. Kokikit Teknologi Oase</b>
+                </td>
+            </tr>
+            <tr class="sign-line">
+                <td><b><br><br><br>(Bp Farhan Sujatmiko)</b></td>
+                <td></td>
+                <td><b><br><br><br>(Bp Andry Suhaili)</b></td>
             </tr>
         </table>
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UserController extends Controller
 {
@@ -26,6 +27,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6',
             'role' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -36,6 +38,7 @@ class UserController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'phone_number' => $request->phone_number,
         ]);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
@@ -70,6 +73,7 @@ class UserController extends Controller
             'username' => 'sometimes|required|string|max:255|unique:users,username,' . $id,
             'password' => 'sometimes|required|string|min:6',
             'role' => 'sometimes|required|string|max:255',
+            'phone_number' => 'required|string|max:255'
         ]);
 
         if ($validator->fails()) {

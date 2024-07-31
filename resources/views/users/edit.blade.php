@@ -27,6 +27,13 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ $user->phone_number }}">
+            @error('phone_number')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

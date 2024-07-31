@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 30, 2024 at 08:07 AM
+-- Generation Time: Jul 30, 2024 at 12:26 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -135,7 +135,8 @@ INSERT INTO `mou_items` (`id`, `mou_id`, `products`, `quantity`, `product_size`,
 (7, 20, 'TV Digital', 1, '1kg', 'hitam', '2024-07-29 05:33:22', '2024-07-29 05:33:22'),
 (8, 21, 'Samsung Galaxy A', 1, '1', 'Hitam', '2024-07-29 05:42:31', '2024-07-29 05:42:31'),
 (9, 22, 'Apple iPhone 13 Pro Max', 1, '1cm', 'Rose Gold', '2024-07-30 00:30:16', '2024-07-30 00:30:16'),
-(10, 23, 'AC Portable', 1, '1', 'Rose Gold', '2024-07-30 00:47:52', '2024-07-30 00:47:52');
+(10, 23, 'AC Portable', 1, '1', 'Rose Gold', '2024-07-30 00:47:52', '2024-07-30 00:47:52'),
+(11, 24, 'AC Portable', 1, '1', 'putih', '2024-07-30 04:54:09', '2024-07-30 04:55:05');
 
 -- --------------------------------------------------------
 
@@ -161,7 +162,8 @@ CREATE TABLE `mo_u_s` (
 --
 
 INSERT INTO `mo_u_s` (`id`, `judul`, `fileMoU`, `denganPihak`, `waktuMulai`, `waktuSelesai`, `textMoU`, `status`, `created_at`, `updated_at`) VALUES
-(23, 'Test MoU', '052sPRyXUv.pdf', 'PT Berkah Jaya Abadi', '2024-07-30', '2025-07-30', 'dasdsad', 'Ditolak', '2024-07-30 00:47:52', '2024-07-30 01:03:27');
+(23, 'Test MoU', '052sPRyXUv.pdf', 'PT Berkah Jaya Abadi', '2024-07-30', '2025-07-30', 'dasdsad', 'Ditolak', '2024-07-30 00:47:52', '2024-07-30 01:20:47'),
+(24, 'Kerjasama Ciayumajakuning', 'tQqUnaNvHk.pdf', 'PT Maju Mundur Cantik', '2024-07-30', '2025-07-30', 'adassd', 'Selesai', '2024-07-30 04:54:09', '2024-07-30 05:02:39');
 
 -- --------------------------------------------------------
 
@@ -221,7 +223,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `phone_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -233,14 +235,22 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `updated_at`, `
 (2, 'Mann', '$2y$10$M13dMM8p9bprAimMZJoBNOmtuu1x9MWzted2qKRYO2g0/CZYfOCUS', '2024-07-24 00:36:15', '2024-07-24 00:36:15', 'mitra', ''),
 (3, 'steve', '$2y$10$I50pHGwAwcYDwOUhvX/GBuxt.syxMuQp.x5EUmjJOax81sZ3wwA02', '2024-07-25 19:34:36', '2024-07-25 19:34:36', 'admin', ''),
 (4, 'mitra', '$2y$10$U4kUDvwjePd.2NV7fGaJ8OYapPhiX0FU7R9Ma/lKFXo095rINUL0K', '2024-07-26 00:12:38', '2024-07-26 00:12:38', ' mitra', ''),
-(5, 'Supervisor', '$2y$10$wIlz/DfeXJ45HYgsFBQviOVRT.hiH79U4H9fyFsGnrIEw.0zRo35m', '2024-07-26 00:19:41', '2024-07-26 00:19:41', 'admin', '083823999435'),
-(7, 'Mad Dog', '$2y$10$7r4sfx7/6bZG67qd1R3a4u6u3f6ASRREkSP34OlzQiyKor4soXUi6', '2024-07-26 00:57:08', '2024-07-26 00:57:21', 'mitra', '087875860358'),
-(8, 'Ceisya', '$2y$10$z2VDj9W0jbhkQuoOEYzJc.E1DdVqIhcRlHwX51OEOPeDi09l/dXy6', '2024-07-30 00:17:41', '2024-07-30 00:17:41', 'mitra', '081212778206'),
-(9, 'Mala', '$2y$10$T/HXseLdoC01VSePRcvvVeIN8R4P1xpYuxj4jUlx/CZsXUpRIsHOm', '2024-07-30 00:18:17', '2024-07-30 00:18:17', 'mitra', '08745452023');
+(5, 'Supervisor', '$2y$10$wIlz/DfeXJ45HYgsFBQviOVRT.hiH79U4H9fyFsGnrIEw.0zRo35m', '2024-07-26 00:19:41', '2024-07-26 00:19:41', 'admin', ''),
+(7, 'Mad Dog', '$2y$10$7r4sfx7/6bZG67qd1R3a4u6u3f6ASRREkSP34OlzQiyKor4soXUi6', '2024-07-26 00:57:08', '2024-07-26 00:57:21', 'mitra', ''),
+(8, 'Ceisya', '$2y$10$z2VDj9W0jbhkQuoOEYzJc.E1DdVqIhcRlHwX51OEOPeDi09l/dXy6', '2024-07-30 00:17:41', '2024-07-30 00:17:41', 'mitra', ''),
+(9, 'Mala', '$2y$10$T/HXseLdoC01VSePRcvvVeIN8R4P1xpYuxj4jUlx/CZsXUpRIsHOm', '2024-07-30 00:18:17', '2024-07-30 00:18:17', 'mitra', 'willyrayadi@gmail.com'),
+(10, 'Tikusgot', '$2y$10$SATiu4nerqItjCG9950M9.o/Uc7.RNMqGIGL6e6vYa8aPQPVmG51u', '2024-07-30 04:51:53', '2024-07-30 04:51:53', 'mitra', '081243434'),
+(12, 'sinta', '$2y$10$j/OzJHuZPZZUwaDABMOl3OfxJSbF7oLS.spc0ImPir7dlq6dbasaG', '2024-07-30 05:25:25', '2024-07-30 05:25:25', 'mitra', '08243434');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -308,6 +318,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -329,13 +345,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mou_items`
 --
 ALTER TABLE `mou_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `mo_u_s`
 --
 ALTER TABLE `mo_u_s`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -353,7 +369,7 @@ ALTER TABLE `signatures`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
