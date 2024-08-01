@@ -38,7 +38,7 @@
 
         ol {
             list-style-type: decimal;
-            padding-left: 20px;
+            padding-left: 15px;
         }
 
         li {
@@ -51,7 +51,7 @@
         }
 
         .parties, .terms, .closure {
-            margin-top: 30px;
+            margin-top: 25px;
             text-align: justify;
         }
 
@@ -132,32 +132,102 @@
 
     <div class="container">
         <div class="title">
-            <h3>PERJANJIAN KERJASAMA PENGADAAN (item barang)</h3>
-            <h4>Nomor: 0{{ $Mou->id }}/PROCUREMENT/2024</h4>
+            <h3>SURAT PERJANJIAN KERJASAMA</h3>
+            {{-- <h4>Nomor: 0{{ $Mou->id }}/PROCUREMENT/2024</h4> --}}
         </div>
+        <?php
+        use Carbon\Carbon;
+
+        // Set locale to Indonesian
+        Carbon::setLocale('id');
+
+        // Parse and format the date
+        $formattedDate = Carbon::parse($Mou->waktuMulai)->translatedFormat('l, d F Y');
+        ?>
         <div class="mou">
-            <p>Perjanjian Kerjasama ini dibuat di Jakarta, pada tanggal {{ $Mou->waktuMulai }} oleh dan antara:</p>
+            <p>Pada hari ini <?php echo $formattedDate; ?> masing-masing pihak yang bertanda tangan dibawah ini :</p>
         </div>
         <div class="parties">
-            <ol>
-                <li>
-                    <span class="bold">Bp xxx</span>, swasta, bertempat tinggal di Makassar.
-                    dalam hal ini bertindak dalam kedudukannya selaku Direktur, dari dan oleh karena itu,<br> untuk dan atas nama serta sah dan berwenang mewakili <span class="bold">PT. Indomarco Prismatama</span>,
-                    berkedudukan di Gedung Menara Indomaret<br> Jalan Boulevard Untuk selanjutnya disebut sebagai "<span class='bold'>PIHAK PERTAMA</span>".
-                </li>
-                <li>
-                    <span class="bold">Bp xxx</span>, swasta, bertempat di Jakarta.
-                    dalam hal ini bertindak dalam kedudukannya selaku Direktur, dari dan oleh karena itu,<br> untuk dan atas nama serta sah dan berwenang mewakili <span class="bold">PT. Kokikit Teknologi Indonesia</span>,
-                    berkedudukan di Jakarta Pusat Untuk<br> selanjutnya disebut sebagai "<span class='bold'>PIHAK KEDUA</span>".
-                </li>
-            </ol>
+            <span>Nama:</span> <b>Rahardian Agus M.Pd</b><br><br>
+            <span>Jabatan:</span> Kepala Sekolah SMKP Cipta Karya                    <br><br>
+            <span>Alamat Sekolah:</span> Jl. Swasembada Timur XIII No.14-15 , Jakarta Utara Telepon (021) 430541 –               
+                    430506 Fax. (021) 700506
+        </div>        
+
+        <div class="terms">
+            <p>Dalam hal ini bertindak untuk dan atas nama sekolah SMKP Cipta Karya yang selanjutnya disebut sebagai <b>Pihak I (Pertama)</b></p>
+        </div>
+
+        <div class="parties">
+            <span>Nama:</span> <b>Rico Sutanto</b><br><br>
+            <span>Nama Hotel:</span> {{ $Item->nama_hotel }}<br><br>
+            <span>Jabatan:</span> General Manager<br><br>
+            <span>Alamat:</span> {{ $Item->alamat_hotel }}
+        </div>
+        
+        <div class="terms">
+            <p>Dalam hal ini bertindak untuk dan atas nama HOTEL xxxxxx Yang selanjutnya disebut sebagai <b>Pihak II (Kedua)</b></p>
         </div>
 
         <div class="terms">
-            <p>1. Pihak Pertama membutuhkan Produk sebagaimana Pihak Kedua akan memenuhi kebutuhan pihak Pertama atas produk dengan rincian<br> sebagai berikut:</p>
+            <p>Bahwa Pihak Pertama dan Pihak Kedua <b>Sepakat Untuk Mengadakan Perjanjian Kerjasama</b> di bidang penyaluran On The Job<br> Training Siswa/i SMKP Cipta Karya. Adapun isi perjanjian yang disepakati oleh Pihak Pertama dan Pihak Kedua<br> adalah sebagai berikut :</p>
+            <p class="title"><br><b>Pasal 1</b></p>
+        </div>
+        
+        <div class="terms">
+            <p>Pihak Pertama bersedia mempersiapkan dan mengirimkan Siswa/Siswi untuk melaksanakan On The Job Training di Hotel Pihak<br> Kedua sesuai dengan permintaan Pihak Kedua.</p>
+            <p class="title"><br><b>Pasal 2</b></p>
         </div>
 
-        <div class="table-container">
+        <div class="terms">
+            <p>Pihak Pertama bersedia menyerahkan tanggung-jawab pelatihan sepenuhnya kepada Pihak Kedua, selama masa Prakerin.</p>
+            <p class="title"><br><b>Pasal 3</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Pertama bersedia memenuhi semua prosedur dan persyaratan Prakerin di Hotel Pihak Kedua, dengan prinsip sama-sama<br> menguntungkan.</p>
+            <p class="title"><br><b>Pasal 4</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Pertama bersedia mengantar Trainee, mengadakan monitoring dan menjemputnya pada akhir masa On The Job Training<br><br><br><br></p>
+            <p class="title"><br><b>Pasal 5</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Kedua bersedia menerima dan mengatur pelaksanaan On The Job Training sesuai dengan permintaan Pihak Pertama serta<br> menyesuaikannya dengan situasi dan kondisi Hotel pada saat tersebut.</p>
+            <p class="title"><br><b>Pasal 6</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Kedua berhak menegur dan atau mengembalikan Trainee kepada Pihak Pertama apabila yang bersangkutan melakukan<br> tindakan-tindakan indisipliner.</p>
+            <p class="title"><br><b>Pasal 7</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Kedua berkewajiban memberikan Certifikat kepada Trainee pada akhir masa On TheJob Training.</p>
+            <p class="title"><br><b>Pasal 8</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Pihak Kedua bersedia memprioritaskan tamatan Pihak Pertama untuk menjadi karyawan diHotel Pihak Kedua. Apabila keadaan<br> memungkinkan dan apabila yang bersangkutan dapat memenuhi persyaratan yang ditetapkan Pihak Kedua.</p>
+            <p class="title"><br><b>Pasal 9</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Perjanjian ini berlaku sejak disetujui dan ditanda-tangani oleh kedua Pihak.</p>
+            <p class="title"><br><b>Pasal 10</b></p>
+        </div>
+
+        <div class="terms">
+            <p>Hal-hal yang belum tercantum dalam perjanjian kerjasama ini akan diatur kemudian dengan jalan musyawarah antara kedua Pihak.</p>
+        </div>
+
+        <div class="terms">
+            <p>Demikianlah Perjanjian Kerjasama ini dibuat dengan sebenar-benarnya dan tanpa paksaan dari pihak manapun.</p>
+        </div>
+
+        {{-- <div class="table-container">
             <table class="table">
                 <thead>
                     <tr>
@@ -236,15 +306,15 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
 
-        <div class="terms">
+        {{-- <div class="terms">
             <p>2. Ketentuan dan syarat lain sehubungan dengan kerjasama ini tertuang Syarat dan Ketentuan Umum, yang menjadi satu kesatuan<br> dan tidak terpisahkan dengan Perjanjian ini.</p>
         </div>
 
         <div class="closure">
             <p>Demikianlah Perjanjian Ini dibuat atas dasar kesepakatan kedua belah pihak, keduanya bermaterai cukup, serta ditandatangani oleh <br>kedua belah pihak. masing masing rangkapnya memiliki kuasa hukum yang sama dan masing-masing pihak akan memegang satu<br> diantaranya sebagai aslinya.</p>
-        </div>
+        </div> --}}
 
         {{-- <div class="sign">
             <div>
@@ -262,19 +332,21 @@
         <table class="signature-table">
             <tr>
                 <td>
-                    <b>PIHAK PERTAMA</b><br>
-                    <b>PT. Indomarco Prismatama</b>
+                    <b>Pihak II,</b><br>
+                    General Manager<br>
+                    Cipta Karya {{ $Item->nama_hotel }}
                 </td>
                 <td></td>
                 <td>
-                    <b>PIHAK KEDUA</b><br>
-                    <b>PT. Kokikit Teknologi Oase</b>
+                    Jakarta, <?php echo $formattedDate; ?><br><br><br>
+                    <b>Pihak I,</b><br>
+                    Kepala Sekolah SMKP<br>
                 </td>
             </tr>
             <tr class="sign-line">
-                <td><b><br><br><br>(Bp Farhan Sujatmiko)</b></td>
+                <td><b><br><br><br>(Rico Sutanto)</b></td>
                 <td></td>
-                <td><b><br><br><br>(Bp Andry Suhaili)</b></td>
+                <td><b><br><br><br>(Rahardian Agus M.Pd)</b></td>
             </tr>
         </table>
 

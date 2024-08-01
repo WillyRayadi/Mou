@@ -43,10 +43,10 @@
                     <li class="text">Mou</li>
                 </a>
                 @if(Auth::user()->role == "admin")
-                <a href="/categories" class="menu-item {{ Request::is('categories') ? 'active' : '' }}">
+                {{-- <a href="/categories" class="menu-item {{ Request::is('categories') ? 'active' : '' }}">
                     <i class="bx bxs-grid icon"></i>
                     <li class="text">Categories</li>
-                </a>
+                </a> --}}
                 <a href="/users" class="menu-item {{ Request::is('users') ? 'active' : '' }}">
                     <i class="bx bxs-user-account icon"></i>
                     <li class="text">Users</li>
