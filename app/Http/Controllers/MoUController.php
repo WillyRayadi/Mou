@@ -107,10 +107,10 @@ class MoUController extends Controller
 
         $data = [
             'mou_id' => $mou->id,
-            'products' => $request->input('products'),
-            'quantity' => $request->input('quantity'),
-            'product_size' => $request->input('product_size'),
-            'product_color' => $request->input('product_color')
+            'category' => $request->input('category'),
+            'nama_hotel' => $request->input('nama_hotel'),
+            'jumlah_siswa' => $request->input('jumlah_siswa'),
+            'alamat_hotel' => $request->input('alamat_hotel')
         ];
 
         MouItem::create($data);
@@ -204,10 +204,10 @@ class MoUController extends Controller
         ]);
 
         $validateProduct = $request->validate([
-            "products" => 'required',
-            "quantity" => 'required',
-            "product_size" => 'required',
-            "product_color" => 'required',
+            "category" => 'required',
+            "nama_hotel" => 'required',
+            "jumlah_siswa" => 'required',
+            "alamat_hotel" => 'required',
         ]);
 
         if ($request->file('fileMoU')) {

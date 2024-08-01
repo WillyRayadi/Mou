@@ -9,7 +9,7 @@ class MouItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['mou_id', 'products', 'quantity', 'product_size', 'product_color'];
+    protected $fillable = ['mou_id', 'category', 'nama_hotel', 'jumlah_siswa', 'alamat_hotel'];
 
     public function mou()
     {

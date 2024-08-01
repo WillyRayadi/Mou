@@ -39,36 +39,36 @@
             </div>
             @if($Product)
             <div class="form-floating mb-3 position-relative">
-                <input type="text" name="products" class="form-control rounded-4 @error('products')is-invalid @enderror" placeholder="Barang" id="products" value="{{ old('products', $Product->products) }}" required>
-                <label class="form-label" for="products">Barang</label>
-                @error('products')
+                <input type="text" name="category" class="form-control rounded-4 @error('category')is-invalid @enderror" placeholder="Category" id="category" value="{{ old('category', $Product->category) }}" required>
+                <label class="form-label" for="category">Category</label>
+                @error('category')
                 <div class="invalid-tooltip">
                     {{ $message }}
                 </div>
                 @enderror
             </div>
             <div class="form-floating mb-3 position-relative">
-                <input type="text" name="quantity" class="form-control rounded-4 @error('quantity')is-invalid @enderror" placeholder="Jumlah Barang" id="quantity" value="{{ old('quantity', $Product->quantity) }}" required>
-                <label class="form-label" for="quantity">Jumlah Barang</label>
-                @error('quantity')
+                <input type="text" name="nama_hotel" class="form-control rounded-4 @error('nama_hotel')is-invalid @enderror" placeholder="Nama Hotel" id="nama_hotel" value="{{ old('nama_hotel', $Product->nama_hotel) }}" required>
+                <label class="form-label" for="nama_hotel">Nama Hotel</label>
+                @error('nama_hotel')
                 <div class="invalid-tooltip">
                     {{ $message }}
                 </div>
                 @enderror
             </div>
             <div class="form-floating mb-3 position-relative">
-                <input type="text" name="product_size" class="form-control rounded-4 @error('product_size')is-invalid @enderror" placeholder="Ukuran Barang" id="product_size" value="{{ old('product_size', $Product->product_size) }}" required>
-                <label class="form-label" for="product_size">Ukuran Barang</label>
-                @error('product_size')
+                <input type="text" name="jumlah_siswa" class="form-control rounded-4 @error('jumlah_siswa')is-invalid @enderror" placeholder="Jumlah Siswa" id="jumlah_siswa" value="{{ old('jumlah_siswa', $Product->jumlah_siswa) }}" required>
+                <label class="form-label" for="jumlah_siswa">Jumlah Siswa</label>
+                @error('jumlah_siswa')
                 <div class="invalid-tooltip">
                     {{ $message }}
                 </div>
                 @enderror
             </div>
             <div class="form-floating mb-3 position-relative">
-                <input type="text" name="product_color" class="form-control rounded-4 @error('product_color')is-invalid @enderror" placeholder="Warna Barang" id="product_color" value="{{ old('product_color', $Product->product_color) }}" required>
-                <label class="form-label" for="product_color">Warna Barang</label>
-                @error('product_color')
+                <input type="text" name="alamat_hotel" class="form-control rounded-4 @error('alamat_hotel')is-invalid @enderror" placeholder="Alamat Hotel" id="alamat_hotel" value="{{ old('alamat_hotel', $Product->alamat_hotel) }}" required>
+                <label class="form-label" for="alamat_hotel">Alamat Hotel</label>
+                @error('alamat_hotel')
                 <div class="invalid-tooltip">
                     {{ $message }}
                 </div>

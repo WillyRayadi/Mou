@@ -9,11 +9,11 @@
             <li>Bekerja sama dengan {{ $MoU->denganPihak }}</li>
             <li>Dimulai pada {{ $MoU->waktuMulai }}</li>
             <li>Berakhir pada {{ $MoU->waktuSelesai }}</li>
-            <li>Kategori: {{ $MoU->category ? $MoU->category->name : 'Tidak ada kategori' }}</li>
-            <li>Barang: {{ $Product->products }}</li>
-            <li>Jumlah Barang: {{ $Product->quantity }}</li>
-            <li>Ukuran Barang: {{ $Product->product_size }}</li>
-            <li>Warna Barang: {{ $Product->product_color }}</li>
+            {{-- <li>Kategori: {{ $MoU->category ? $MoU->category->name : 'Tidak ada kategori' }}</li> --}}
+            <li>Category: {{ $Product->category }}</li>
+            <li>Nama Hotel: {{ $Product->nama_hotel }}</li>
+            <li>Jumlah Siswa: {{ $Product->jumlah_siswa }}</li>
+            <li>Alamat Hotel: {{ $Product->alamat_hotel }}</li>
         </ul>
         <h5 class="card-title">Keterangan MoU</h5>
         <p class="card-text">{!! $MoU->textMoU !!}</p>
