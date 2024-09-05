@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('contents')
 
-<h2>Dashboard</h2>
+<h2>Dashboards</h2>
 
 @endsection
